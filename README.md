@@ -12,6 +12,13 @@ Installation
 
 ToDo: Explain how install and use.
 
+Contributing
+------------
+
+If you have any ideas or feature requests or bugfixes, please do create
+issues, forks, pull requests, whatever. If there's something that be
+done to make this better, I want to know about it!
+
 Troubleshooting
 ---------------
 
