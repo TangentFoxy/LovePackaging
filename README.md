@@ -13,7 +13,7 @@ Installation
 1. Download this (either from the ZIP link in the bottom right or the releases linked to at the top of the repository)!
 2. Copy the files wherever you want, inside your own repo, outside, wherever!
 3. Edit `config.txt` to specify options on how your packages will be built, including where the sources are and where to put the result.
-4. Run build.sh or build.bat depending on your system.
+4. Run build or build.bat depending on your system.
 
 Contributing
 ------------
