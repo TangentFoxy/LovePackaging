@@ -11,7 +11,6 @@ outputDir="$(pwd)/builds"
 # Where the source code is. (This should be where your main.lua file is.)
 sourceDir="$(pwd)/src"
 # Files to include in ZIP packages. (ReadMe's, licenses, etc.)
-# Do not include a "license.txt" file. Name your license something else.
 includes="$(pwd)/includes"
 
 # Where unzipped executables to make packages out of will be kept
@@ -21,6 +20,14 @@ osx10Dir="$outputDir/osx10src"
 
 # Remove old packages?
 removeOld=false
+
+# Allow overwrite? NOT IMPLEMENTED
+# If this is false, LovePackaging will quit if you try to build with the same version number twice.
+allowOverwrite=false
+
+# Auto-number builds? NOT IMPLEMENTED
+# An "-buildN" will be added to the end of ZIP package names, with N being the Nth time this project was built.
+autoNumberBuilds=false
 
 # Only change this if you know what you're doing (Read the README.md file).
 macInfoPlistFixed=false

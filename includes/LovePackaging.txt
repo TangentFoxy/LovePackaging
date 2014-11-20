@@ -1,9 +1,0 @@
-This package created with LovePackaging!
-http://www.github.com/Guard13007/LovePackaging
-
-LovePackaging is released under the MIT license.
-This means you can do what you want with it as
-long as you keep the license notice for it/the
-part of it you use.
-
-You don't even need to keep this file! :D
