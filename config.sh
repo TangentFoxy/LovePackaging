@@ -29,5 +29,10 @@ allowOverwrite=false
 # An "-buildN" will be added to the end of ZIP package names, with N being the Nth time this project was built.
 autoNumberBuilds=false
 
+# Use curl or wget?
+# Comment out the first and uncomment the second to use wget instead of curl.
+download="curl -o"
+#download="wget --progress=bar:force -O"
+
 # Only change this if you know what you're doing (Read the README.md file).
 macInfoPlistFixed=false

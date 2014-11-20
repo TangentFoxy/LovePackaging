@@ -30,7 +30,7 @@ echo "  Done."
 if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
 	mkdir -p "$win32Dir"
 	echo "Downloading win32src..."
-	wget -nv -O "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
+	$download "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
 	echo "  Extracting win32src..."
 	unzip -q "$win32Dir/love32.zip" -d "$win32Dir"
 	echo "    Done."
@@ -39,7 +39,7 @@ fi
 if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
 	mkdir -p "$win64Dir"
 	echo "Downloading win64src..."
-	wget -nv -O "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
+	$download "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
 	echo "  Extracting win64src..."
 	unzip -q "$win64Dir/love64.zip" -d "$win64Dir"
 	echo "    Done."
@@ -48,7 +48,7 @@ fi
 if [ ! -d "$osx10Dir/love.app" ]; then
 	mkdir -p "$osx10Dir"
 	echo "Downloading osx10src..."
-	wget -nv -O "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
+	$download "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
 	echo "  Extracting osx10src..."
 	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
 	# delete Mac crao (for some reason can't not unzip it *shrugs*)
