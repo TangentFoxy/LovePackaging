@@ -1,6 +1,6 @@
-# The name of the resulting executable.
+# The name of the resulting executables.
 packageName="LovePackagingExample"
-# Where to place the resulting executable.
+# Where to place the resulting executables.
 outputDir="$(pwd)/build"
 # Where the source code is. (This should be where your main.lua file is.)
 sourceDir="$(pwd)/src"
@@ -14,7 +14,7 @@ author="Guard13007"
 version="0.1"
 
 # Remove old packages?
-removeOld=true
+removeOld=false
 
 # Where unzipped executables to make packages out of will be kept
 win32Dir="$build/win32src"
