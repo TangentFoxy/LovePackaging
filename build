@@ -23,7 +23,7 @@ cd "$sourceDir"
 # build .love file
 echo "Building $packageName (version $version)... (.love file)"
 zip -r -X -q "$outputDir/$packageName-$version.love" ./*
-echo "Done."
+echo "  Done."
 
 # check if executables exist, if not, download them
 #   assumes if the exe exists, everything else does too
@@ -31,35 +31,34 @@ if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
 	mkdir -p "$win32Dir"
 	echo "Downloading win32src..."
 	wget -nv -O "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
-	echo "Extracting win32src..."
+	echo "  Extracting win32src..."
 	unzip -q "$win32Dir/love32.zip" -d "$win32Dir"
-	echo "Done."
+	echo "    Done."
 fi
 
 if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
 	mkdir -p "$win64Dir"
 	echo "Downloading win64src..."
 	wget -nv -O "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
-	echo "Extracting win64src..."
+	echo "  Extracting win64src..."
 	unzip -q "$win64Dir/love64.zip" -d "$win64Dir"
-	echo "Done."
+	echo "    Done."
 fi
 
 if [ ! -d "$osx10Dir/love.app" ]; then
 	mkdir -p "$osx10Dir"
 	echo "Downloading osx10src..."
 	wget -nv -O "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
-	echo "Extracting osx10src..."
+	echo "  Extracting osx10src..."
 	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
 	# delete Mac crao (for some reason can't not unzip it *shrugs*)
 	rm -rf "$osx10Dir/__MACOSX"
 	# the Info.plist is overwritten each time the app is built, so it is not fixed here.
-	echo "Done."
+	echo "    Done."
 fi
 
 # build executables and zip files for them
 
-echo
 echo "Building $packageName (version $version)... (win32 zip)"
 cat "$win32Dir/love-0.9.1-win32/love.exe" "$outputDir/$packageName-$version.love" > "$win32Dir/$packageName.exe"
 cd "$win32Dir"
@@ -70,9 +69,8 @@ cp ./license.txt ./LOVE-license.txt
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
 cd "$includes"
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
-echo "Done."
+echo "  Done."
 
-echo
 echo "Building $packageName (version $version)... (win64 zip)"
 cat "$win64Dir/love-0.9.1-win64/love.exe" "$outputDir/$packageName-$version.love" > "$win64Dir/$packageName.exe"
 cd "$win64Dir"
@@ -83,10 +81,9 @@ cp ./license.txt ./LOVE-license.txt
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
 cd "$includes"
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
-echo "Done."
+echo "  Done."
 
 if [ $macInfoPlistFixed = true ]; then
-	echo
 	echo "Building $packageName (version $version)... (OS X zip)"
 	# WHY IS THIS CHECK NEEDED? IT IS REDUNDANT
 	if [ -f "$osx10Dir" ]; then
@@ -102,9 +99,8 @@ if [ $macInfoPlistFixed = true ]; then
 	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
 	cd "$includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
-	echo "Done."
+	echo "  Done."
 else
-	echo
 	echo "WARN: Mac packaging disabled."
 	echo "  See README.md for information."
 fi
@@ -117,7 +113,7 @@ cp "$win64Dir/love-0.9.1-win64/LOVE-license.txt" ./LOVE-license.txt
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
 cd "$includes"
 zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
-echo "Done."
+echo "  Done."
 
 echo
-echo "Build complete. Unless there are errors above. Double check your files."
+echo "Builds complete. Unless there are errors above. Double check your files."
