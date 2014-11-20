@@ -1,5 +1,11 @@
 # The name of the resulting executables.
 packageName="LovePackagingExample"
+# Who made this? (Yes, change this to your name.)
+author="Guard13007"
+# Current version (of your program)
+version="0.1"
+
+###### Important! ONLY USE ABSOLUATE PATHS ######
 # Where to place the resulting executables.
 outputDir="$(pwd)/builds"
 # Where the source code is. (This should be where your main.lua file is.)
@@ -8,18 +14,13 @@ sourceDir="$(pwd)/src"
 # Do not include a "license.txt" file. Name your license something else.
 includes="$(pwd)/includes"
 
-# Who made this? (Yes, change this to your name.)
-author="Guard13007"
-# Current version (of your program)
-version="0.1"
-
-# Remove old packages?
-removeOld=false
-
 # Where unzipped executables to make packages out of will be kept
 win32Dir="$outputDir/win32src"
 win64Dir="$outputDir/win64src"
 osx10Dir="$outputDir/osx10src"
+
+# Remove old packages?
+removeOld=false
 
 # Only change this if you know what you're doing (Read the README.md file).
 macInfoPlistFixed=false

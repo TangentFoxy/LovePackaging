@@ -44,13 +44,30 @@ fi
 # build executables and zip files for them
 
 echo "Building $packageName (version $version)... (win32 zip)"
-cat $wind32Dir/love-0.9.1-win32/love.exe $outputDir/$packageName-$version.love > $wind32Dir/$packageName.exe
-zip -r $outputDir/$packageName-$version_win32.zip $wind32Dir/$packageName.exe $wind32Dir/love-0.9.1-win32/*.dll $wind32Dir/love-0.9.1-win32/license.txt $includes
+cat $win32Dir/love-0.9.1-win32/love.exe $outputDir/$packageName-$version.love > $win32Dir/$packageName.exe
+#zip -r $outputDir/$packageName-$version_win32.zip $win32Dir/$packageName.exe $win32Dir/love-0.9.1-win32/*.dll $win32Dir/love-0.9.1-win32/license.txt $includes
+#cd $originalDir
+cd $win32Dir
+zip -r $outputDir/$packageName-$version_win32.zip ./$packageName.exe
+cd ./love-0.9.1-win32
+zip -r $outputDir/$packageName-$version_win32.zip ./*.dll
+zip -r $outputDir/$packageName-$version_win32.zip ./license.txt
+#cd $originalDir
+cd $includes
+zip -r $outputDir/$packageName-$version_win32.zip ./*
 
 echo "Building $packageName (version $version)... (win64 zip)"
 cat $win64Dir/love-0.9.1-win64/love.exe $outputDir/$packageName-$version.love > $win64Dir/$packageName.exe
-zip -r $outputDir/$packageName-$version_win64.zip $win64Dir/$packageName.exe $win64Dir/love-0.9.1-win64/*.dll $win64Dir/love-0.9.1-win64/license.txt $includes
-
+#zip -r $outputDir/$packageName-$version_win64.zip $win64Dir/$packageName.exe $win64Dir/love-0.9.1-win64/*.dll $win64Dir/love-0.9.1-win64/license.txt $includes
+#cd $originalDir
+cd $win64Dir
+zip -r $outputDir/$packageName-$version_win64.zip ./$packageName.exe
+cd ./love-0.9.1-win64
+zip -r $outputDir/$packageName-$version_win64.zip ./*.dll
+zip -r $outputDir/$packageName-$version_win64.zip ./license.txt
+#cd $originalDir
+cd $includes
+zip -r $outputDir/$packageName-$version_win64.zip ./*
 
 if [ $macInfoPlistFixed = true ]; then
 	echo "Building $packageName (version $version)... (OS X zip)"
@@ -59,7 +76,13 @@ if [ $macInfoPlistFixed = true ]; then
 	fi
 	cp $outputDir/$packageName-$version.love $osx10Dir/love.app/Contents/Resources/$packageName.love
 	cp $originalDir/Info.plist $osx10Dir/love.app/Contents/Info.plist
-	zip -r $outputDir/$packageName-$version_osx.zip $osx10Dir/love.app $includes
+	#zip -r $outputDir/$packageName-$version_osx.zip $osx10Dir/love.app $includes
+	#cd $originalDir
+	cd $osx10Dir
+	zip -r $outputDir/$packageName-$version_osx.zip ./love.app
+	#cd $originalDir
+	cd $includes
+	zip -r $outputDir/$packageName-$version_osx.zip ./*
 else
 	echo "WARN: Mac packaging disabled."
 fi
