@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# keep unset variables from breaking everything
+set -o nounset
+# exit on error instead of continuing
+set -o errexit
+
 # get config
 source ./config.txt
 
@@ -14,31 +19,32 @@ cd $sourceDir
 
 # build .love file
 echo "Building $packageName (version $version)... (.love file)"
-zip -r $outputDir/$packageName-$version.love ./*
+zip -r -X $outputDir/$packageName-$version.love ./*
 
-# check if executables (their directories) exist, if not, download them
-if [ ! -d $win32Dir ]; then
+# check if executables exist, if not, download them
+#   assumes if the exe exists, everything else does too
+if [ ! -r $win32Dir/love-0.9.1-win32/love.exe ]; then
 	mkdir -p $win32Dir
 	echo "Downloading win32src..."
 	wget -nv -O $win32Dir/love32.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
 	unzip $win32Dir/love32.zip -d $win32Dir
 fi
 
-if [ ! -d $win64Dir ]; then
+if [ ! -r $win64Dir/love-0.9.1-win64/love.exe ]; then
 	mkdir -p $win64Dir
 	echo "Downloading win64src..."
 	wget -nv -O $win64Dir/love64.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
 	unzip $win64Dir/love64.zip -d $win64Dir
 fi
 
-if [ ! -d $osx10Dir ]; then
+if [ ! -d $osx10Dir/love.app ]; then
 	mkdir -p $osx10Dir
 	echo "Downloading osx10src..."
 	wget -nv -O $osx10Dir/loveOSX.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
-	unzip $osx10Dir/loveOSX.zip -d $osx10Dir
-	#delete Mac crap
-	rm -rf $osx10Dir/__MACOSX
-	#the Info.plist is overwritten each time the app is built, so it is not fixed here.
+	unzip $osx10Dir/loveOSX.zip -d $osx10Dir -x "__MACOSX"
+	#no longer deleting Mac crap because it isn't extracted
+	#rm -rf $osx10Dir/__MACOSX
+	# the Info.plist is overwritten each time the app is built, so it is not fixed here.
 fi
 
 # build executables and zip files for them
@@ -47,25 +53,25 @@ echo
 echo "Building $packageName (version $version)... (win32 zip)"
 cat $win32Dir/love-0.9.1-win32/love.exe $outputDir/$packageName-$version.love > $win32Dir/$packageName.exe
 cd $win32Dir
-zip -r $outputDir/$packageName-${version}_win32.zip ./$packageName.exe
+zip -r -X $outputDir/$packageName-${version}_win32.zip ./$packageName.exe
 cd ./love-0.9.1-win32
-zip -r $outputDir/$packageName-${version}_win32.zip ./*.dll
+zip -r -X $outputDir/$packageName-${version}_win32.zip ./*.dll
 cp ./license.txt ./LOVE-license.txt
-zip -r $outputDir/$packageName-${version}_win32.zip ./LOVE-license.txt
+zip -r -X $outputDir/$packageName-${version}_win32.zip ./LOVE-license.txt
 cd $includes
-zip -r $outputDir/$packageName-${version}_win32.zip ./*
+zip -r -X $outputDir/$packageName-${version}_win32.zip ./*
 
 echo
 echo "Building $packageName (version $version)... (win64 zip)"
 cat $win64Dir/love-0.9.1-win64/love.exe $outputDir/$packageName-$version.love > $win64Dir/$packageName.exe
 cd $win64Dir
-zip -r $outputDir/$packageName-${version}_win64.zip ./$packageName.exe
+zip -r -X $outputDir/$packageName-${version}_win64.zip ./$packageName.exe
 cd ./love-0.9.1-win64
-zip -r $outputDir/$packageName-${version}_win64.zip ./*.dll
+zip -r -X $outputDir/$packageName-${version}_win64.zip ./*.dll
 cp ./license.txt ./LOVE-license.txt
-zip -r $outputDir/$packageName-${version}_win64.zip ./LOVE-license.txt
+zip -r -X $outputDir/$packageName-${version}_win64.zip ./LOVE-license.txt
 cd $includes
-zip -r $outputDir/$packageName-${version}_win64.zip ./*
+zip -r -X $outputDir/$packageName-${version}_win64.zip ./*
 
 if [ $macInfoPlistFixed = true ]; then
 	echo
@@ -76,9 +82,9 @@ if [ $macInfoPlistFixed = true ]; then
 	cp $outputDir/$packageName-$version.love $osx10Dir/love.app/Contents/Resources/$packageName.love
 	cp $originalDir/Info.plist $osx10Dir/love.app/Contents/Info.plist
 	cd $osx10Dir
-	zip -r $outputDir/$packageName-${version}_osx.zip ./love.app
+	zip -r -X $outputDir/$packageName-${version}_osx.zip ./love.app
 	cd $includes
-	zip -r $outputDir/$packageName-${version}_osx.zip ./*
+	zip -r -X $outputDir/$packageName-${version}_osx.zip ./*
 else
 	echo "WARN: Mac packaging disabled."
 	echo "  See README.md for information."
@@ -87,11 +93,11 @@ fi
 echo
 echo "Building $packageName (version $version)... (Linux zip)"
 cd $outputDir
-zip -r ./$packageName-${version}_linux.zip ./$packageName-$version.love
+zip -r -X ./$packageName-${version}_linux.zip ./$packageName-$version.love
 cp $win64Dir/love-0.9.1-win64/LOVE-license.txt ./LOVE-license.txt
-zip -r ./$packageName-${version}_linux.zip ./LOVE-license.txt
+zip -r -X ./$packageName-${version}_linux.zip ./LOVE-license.txt
 cd $includes
-zip -r $outputDir/$packageName-${version}_linux.zip ./*
+zip -r -X $outputDir/$packageName-${version}_linux.zip ./*
 
 echo
 echo "Build complete. Unless there are errors above. Double check your files."
