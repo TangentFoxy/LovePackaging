@@ -6,44 +6,47 @@ set -o nounset
 set -o errexit
 
 # get config
-source ./config.txt
+#if $1 ; then
+# has a command-line option
+#fi
+source ./config.sh
 
 # remove old versions of package?
 if [ $removeOld = true ]; then
-	rm -f $outputDir/$packageName*
+	rm -f "$outputDir/$packageName*"
 fi
 
 # move to source dir
 originalDir=$(pwd)
-cd $sourceDir
+cd "$sourceDir"
 
 # build .love file
 echo "Building $packageName (version $version)... (.love file)"
-zip -r -X $outputDir/$packageName-$version.love ./*
+zip -r -X "$outputDir/$packageName-$version.love" ./*
 
 # check if executables exist, if not, download them
 #   assumes if the exe exists, everything else does too
-if [ ! -r $win32Dir/love-0.9.1-win32/love.exe ]; then
-	mkdir -p $win32Dir
+if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
+	mkdir -p "$win32Dir"
 	echo "Downloading win32src..."
-	wget -nv -O $win32Dir/love32.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
-	unzip $win32Dir/love32.zip -d $win32Dir
+	wget -nv -O "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
+	unzip "$win32Dir/love32.zip" -d "$win32Dir"
 fi
 
-if [ ! -r $win64Dir/love-0.9.1-win64/love.exe ]; then
-	mkdir -p $win64Dir
+if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
+	mkdir -p "$win64Dir"
 	echo "Downloading win64src..."
-	wget -nv -O $win64Dir/love64.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
-	unzip $win64Dir/love64.zip -d $win64Dir
+	wget -nv -O "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
+	unzip "$win64Dir/love64.zip" -d "$win64Dir"
 fi
 
-if [ ! -d $osx10Dir/love.app ]; then
-	mkdir -p $osx10Dir
+if [ ! -d "$osx10Dir/love.app" ]; then
+	mkdir -p "$osx10Dir"
 	echo "Downloading osx10src..."
-	wget -nv -O $osx10Dir/loveOSX.zip https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
-	unzip $osx10Dir/loveOSX.zip -d $osx10Dir -x "__MACOSX"
+	wget -nv -O "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
+	unzip "$osx10Dir/loveOSX.zip" -d "$osx10Dir" -x "__MACOSX"
 	#no longer deleting Mac crap because it isn't extracted
-	#rm -rf $osx10Dir/__MACOSX
+	#rm -rf "$osx10Dir/__MACOSX"
 	# the Info.plist is overwritten each time the app is built, so it is not fixed here.
 fi
 
@@ -51,40 +54,45 @@ fi
 
 echo
 echo "Building $packageName (version $version)... (win32 zip)"
-cat $win32Dir/love-0.9.1-win32/love.exe $outputDir/$packageName-$version.love > $win32Dir/$packageName.exe
-cd $win32Dir
-zip -r -X $outputDir/$packageName-${version}_win32.zip ./$packageName.exe
+cat "$win32Dir/love-0.9.1-win32/love.exe" "$outputDir/$packageName-$version.love" > "$win32Dir/$packageName.exe"
+cd "$win32Dir"
+zip -r -X "$outputDir/$packageName-${version}_win32.zip" "./$packageName.exe"
 cd ./love-0.9.1-win32
-zip -r -X $outputDir/$packageName-${version}_win32.zip ./*.dll
+zip -r -X "$outputDir/$packageName-${version}_win32.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
-zip -r -X $outputDir/$packageName-${version}_win32.zip ./LOVE-license.txt
-cd $includes
-zip -r -X $outputDir/$packageName-${version}_win32.zip ./*
+zip -r -X "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
+cd "$includes"
+zip -r -X "$outputDir/$packageName-${version}_win32.zip" ./*
 
 echo
 echo "Building $packageName (version $version)... (win64 zip)"
-cat $win64Dir/love-0.9.1-win64/love.exe $outputDir/$packageName-$version.love > $win64Dir/$packageName.exe
-cd $win64Dir
-zip -r -X $outputDir/$packageName-${version}_win64.zip ./$packageName.exe
+cat "$win64Dir/love-0.9.1-win64/love.exe" "$outputDir/$packageName-$version.love" > "$win64Dir/$packageName.exe"
+cd "$win64Dir"
+zip -r -X "$outputDir/$packageName-${version}_win64.zip" "./$packageName.exe"
 cd ./love-0.9.1-win64
-zip -r -X $outputDir/$packageName-${version}_win64.zip ./*.dll
+zip -r -X "$outputDir/$packageName-${version}_win64.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
-zip -r -X $outputDir/$packageName-${version}_win64.zip ./LOVE-license.txt
-cd $includes
-zip -r -X $outputDir/$packageName-${version}_win64.zip ./*
+zip -r -X "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
+cd "$includes"
+zip -r -X "$outputDir/$packageName-${version}_win64.zip" ./*
 
 if [ $macInfoPlistFixed = true ]; then
 	echo
 	echo "Building $packageName (version $version)... (OS X zip)"
-	if [ -f $osx10Dir ]; then
-		rm -f $osx10Dir/love.app/Contents/Resources/$packageName.love
+	# WHY IS THIS CHECK NEEDED? IT IS REDUNDANT
+	if [ -f "$osx10Dir" ]; then
+		rm -f "$osx10Dir/love.app/Contents/Resources/$packageName.love"
 	fi
-	cp $outputDir/$packageName-$version.love $osx10Dir/love.app/Contents/Resources/$packageName.love
-	cp $originalDir/Info.plist $osx10Dir/love.app/Contents/Info.plist
-	cd $osx10Dir
-	zip -r -X $outputDir/$packageName-${version}_osx.zip ./love.app
-	cd $includes
-	zip -r -X $outputDir/$packageName-${version}_osx.zip ./*
+	cp "$outputDir/$packageName-$version.love" "$osx10Dir/love.app/Contents/Resources/$packageName.love"
+	cp "$originalDir/Info.plist" "$osx10Dir/love.app/Contents/Info.plist"
+	cd "$osx10Dir"
+	# the copy is so multiple things can be built in the same place without interfering
+	#make this copy happen at the beginning of mac crap, so the mac stuff is completely separate for each project
+	#make the Info.plist location configurable! (for multiple configs to be possible, this must be done)
+	cp ./love.app "./$packageName.app"
+	zip -r -X "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
+	cd "$includes"
+	zip -r -X "$outputDir/$packageName-${version}_osx.zip" ./*
 else
 	echo "WARN: Mac packaging disabled."
 	echo "  See README.md for information."
@@ -92,12 +100,12 @@ fi
 
 echo
 echo "Building $packageName (version $version)... (Linux zip)"
-cd $outputDir
-zip -r -X ./$packageName-${version}_linux.zip ./$packageName-$version.love
-cp $win64Dir/love-0.9.1-win64/LOVE-license.txt ./LOVE-license.txt
-zip -r -X ./$packageName-${version}_linux.zip ./LOVE-license.txt
-cd $includes
-zip -r -X $outputDir/$packageName-${version}_linux.zip ./*
+cd "$outputDir"
+zip -r -X "./$packageName-${version}_linux.zip" "./$packageName-$version.love"
+cp "$win64Dir/love-0.9.1-win64/LOVE-license.txt" ./LOVE-license.txt
+zip -r -X "./$packageName-${version}_linux.zip" ./LOVE-license.txt
+cd "$includes"
+zip -r -X "$outputDir/$packageName-${version}_linux.zip" ./*
 
 echo
 echo "Build complete. Unless there are errors above. Double check your files."
