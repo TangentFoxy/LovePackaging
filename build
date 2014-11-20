@@ -44,9 +44,9 @@ if [ ! -d "$osx10Dir/love.app" ]; then
 	mkdir -p "$osx10Dir"
 	echo "Downloading osx10src..."
 	wget -nv -O "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
-	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir" -x "__MACOSX"
-	#no longer deleting Mac crap because it isn't extracted
-	#rm -rf "$osx10Dir/__MACOSX"
+	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
+	# delete Mac crao (for some reason can't not unzip it *shrugs*)
+	rm -rf "$osx10Dir/__MACOSX"
 	# the Info.plist is overwritten each time the app is built, so it is not fixed here.
 fi
 
