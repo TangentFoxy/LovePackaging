@@ -118,3 +118,5 @@ zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
 echo "  Done."
 
 echo "Builds complete. Unless there are errors above. Double check your files."
+echo
+if which fortune > /dev/null 2>&1; then fortune; fi
