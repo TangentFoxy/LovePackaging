@@ -3,9 +3,15 @@ LovePackaging
 
 Scripts to create Love2d packages.
 
-Should be working for Linux but is untested as I am too tired right now.
-Dunno if the shell script is compatible with Mac OS X at all.
-The Windows batch file hasn't been made at all really, not yet.
+Currently working in Linux, untested in OS X (though it should work assuming you
+have wget installed), and undeveloped for Windows.
+
+Features
+--------
+
+- Builds executables for distribution on Windows, Mac, and Linux.
+- Supports including extra files automatically.
+- That's about it for now, but there are other features planned.
 
 Installation
 ------------
