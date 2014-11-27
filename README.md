@@ -34,6 +34,8 @@ done to make this better, I want to know about it!
 Troubleshooting
 ---------------
 
+Feel free to submit an issue for any problem you have, also check [the forum](https://love2d.org/forums/viewtopic.php?f=4&t=79155&sid=2dfd50989af78c87dc75a9558e1ffb08) post for help.
+
 Screenshots are great if you're reporting a problem. But in any case, common
 problems listed below, all one of them!
 
