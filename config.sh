@@ -41,6 +41,3 @@ autoNumberBuilds=false
 # (One of these lines should be commented out, the other not)
 #download="curl -o"
 download="wget --progress=bar:force -O"
-
-# Only change this if you know what you're doing (Read the README.md file).
-macInfoPlistFixed=false
