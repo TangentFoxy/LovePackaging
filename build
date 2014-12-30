@@ -133,11 +133,13 @@ echo "  Done."
 echo "Building $packageName (version $version)... (OS X zip)"
 cd "$osx10Dir"
 # Make a fresh copy of the .app directory
-cp ./love.app "./$packageName.app"
+cp -r ./love.app "./$packageName.app"
 # Copy in our .love file
 cp "$outputDir/$packageName-$version.love" "$osx10Dir/$packageName.app/Contents/Resources/$packageName.love"
 # Create an Info.plist and copy it in
+cd "$originalDir"
 source "$originalDir/scripts/Info.plist-maker.sh"
+cd "$osx10Dir"
 cp "$originalDir/tmp/Info.plist" "$osx10Dir/$packageName.app/Contents/Info.plist"
 # ZIP up the .app directory
 zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
