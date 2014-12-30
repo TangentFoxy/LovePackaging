@@ -31,11 +31,11 @@ fi
 
 # check that zip and unzip are accessible
 #  not sure if this is the best way to do this or not
-if ! which zip; then
+if ! which zip > /dev/null 2>&1; then
 	echo "zip not installed"
 	exit 2;
 fi
-if ! which unzip; then
+if ! which unzip > /dev/null 2>&1; then
 	echo "unzip not installed"
 	exit 3;
 fi
