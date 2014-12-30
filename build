@@ -6,10 +6,12 @@ set -o nounset
 set -o errexit
 
 # get config
-#if $1 ; then
-# has a command-line option
-#fi
-source ./config.sh
+if [ ! -z "$1" ]; then
+	# has a command-line option, which should be the config file to load from
+	source "$1"
+else
+	source ./config.sh
+fi
 
 # append -buildN build numbers
 #  (build.number file stored in $outputDir)
