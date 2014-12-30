@@ -1,7 +1,14 @@
 # The name of the resulting executables.
 packageName="LovePackagingExample"
+# User-friendly package name.
+friendlyPackageName="$packageName"
 # Who made this? (Yes, change this to your name.)
 author="Guard13007"
+# Copyright year (ex 2014-2015 or 2015)
+copyrightYear="2014"
+# A unique identifier for your package.
+# (It should be fine to leave this as its default.)
+identifier="com.$author.$packageName"
 # Current version (of your program)
 version="0.1"
 
