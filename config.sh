@@ -14,6 +14,7 @@ sourceDir="$(pwd)/src"
 includes="$(pwd)/includes"
 
 # Where unzipped executables to make packages out of will be kept
+# (This is also where LOVE executables will be kept before modifications to make your packages)
 win32Dir="$outputDir/win32src"
 win64Dir="$outputDir/win64src"
 osx10Dir="$outputDir/osx10src"
@@ -30,7 +31,7 @@ allowOverwrite=false
 autoNumberBuilds=false
 
 # Use curl or wget?
-# Comment out one and..not the other...
+# (One of these lines should be commented out, the other not)
 #download="curl -o"
 download="wget --progress=bar:force -O"
 
