@@ -11,12 +11,24 @@ set -o errexit
 #fi
 source ./config.sh
 
+# check that zip and unzip are accessible
+#  not sure if this is the best way to do this or not
+if ! which zip; then
+	echo "zip not installed"
+	exit 2;
+fi
+if ! which unzip; then
+	echo "unzip not installed"
+	exit 3;
+fi
+
 # remove old versions of package?
 if [ $removeOld = true ]; then
 	rm -f "$outputDir/$packageName*"
 fi
 
-# move to source dir
+# move to source dir and store original for later use
+# (this is to make a zip command work)
 originalDir=$(pwd)
 cd "$sourceDir"
 
@@ -26,7 +38,7 @@ zip -r -X -q "$outputDir/$packageName-$version.love" ./*
 echo "  Done."
 
 # check if executables exist, if not, download them
-#   assumes if the exe exists, everything else does too
+#   (assumes if the exe exists, everything else does too)
 if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
 	mkdir -p "$win32Dir"
 	echo "Downloading win32src..."
@@ -56,64 +68,72 @@ if [ ! -d "$osx10Dir/love.app" ]; then
 	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
 	# delete Mac crao (for some reason can't not unzip it *shrugs*)
 	rm -rf "$osx10Dir/__MACOSX"
-	# the Info.plist is overwritten each time the app is built, so it is not fixed here.
+	# the Info.plist is generated each time a package is built, we don't need a copy here
+	rm -f "$osx10Dir/love.app/Contents/Info.plist"
 	echo "  Done."
 fi
 
 # build executables and zip files for them
 
 echo "Building $packageName (version $version)... (win32 zip)"
+# EXE with ZIP at end
 cat "$win32Dir/love-0.9.1-win32/love.exe" "$outputDir/$packageName-$version.love" > "$win32Dir/$packageName.exe"
 cd "$win32Dir"
+# ZIP up the EXE
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" "./$packageName.exe"
 cd ./love-0.9.1-win32
+# ZIP up the required DLLs
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
+# ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
 cd "$includes"
+# ZIP up extra included files
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
 echo "  Done."
 
 echo "Building $packageName (version $version)... (win64 zip)"
+# EXE with ZIP at end
 cat "$win64Dir/love-0.9.1-win64/love.exe" "$outputDir/$packageName-$version.love" > "$win64Dir/$packageName.exe"
 cd "$win64Dir"
+# ZIP up the EXE
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" "./$packageName.exe"
 cd ./love-0.9.1-win64
+# ZIP up the required DLLs
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
+# ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
 cd "$includes"
+# ZIP up extra included files
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
 echo "  Done."
 
-if [ $macInfoPlistFixed = true ]; then
-	echo "Building $packageName (version $version)... (OS X zip)"
-	# WHY IS THIS CHECK NEEDED? IT IS REDUNDANT
-	if [ -f "$osx10Dir" ]; then
-		rm -f "$osx10Dir/love.app/Contents/Resources/$packageName.love"
-	fi
-	cp "$outputDir/$packageName-$version.love" "$osx10Dir/love.app/Contents/Resources/$packageName.love"
-	cp "$originalDir/Info.plist" "$osx10Dir/love.app/Contents/Info.plist"
-	cd "$osx10Dir"
-	# the copy is so multiple things can be built in the same place without interfering
-	#make this copy happen at the beginning of mac crap, so the mac stuff is completely separate for each project
-	#make the Info.plist location configurable! (for multiple configs to be possible, this must be done)
-	cp ./love.app "./$packageName.app"
-	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
-	cd "$includes"
-	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
-	echo "  Done."
-else
-	echo "WARN: Mac packaging disabled."
-	echo "  See README.md for information."
-fi
+echo "Building $packageName (version $version)... (OS X zip)"
+cd "$osx10Dir"
+# Make a fresh copy of the .app directory
+cp ./love.app "./$packageName.app"
+# Copy in our .love file
+cp "$outputDir/$packageName-$version.love" "$osx10Dir/$packageName.app/Contents/Resources/$packageName.love"
+# Create an Info.plist and copy it in
+source "$originalDir/scripts/Info.plist-maker.sh"
+cp "$originalDir/tmp/Info.plist" "$osx10Dir/$packageName.app/Contents/Info.plist"
+# ZIP up the .app directory
+zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
+cd "$includes"
+# ZIP up the extra included files
+zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
+echo "  Done."
 
 echo "Building $packageName (version $version)... (Linux zip)"
 cd "$outputDir"
+# ZIP up the .love file
 zip -r -X -q "./$packageName-${version}_linux.zip" "./$packageName-$version.love"
 cp "$win64Dir/love-0.9.1-win64/LOVE-license.txt" ./LOVE-license.txt
+# ZIP up the LOVE license
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
 cd "$includes"
+# ZIP up the extra included files
 zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
 echo "  Done."
 
