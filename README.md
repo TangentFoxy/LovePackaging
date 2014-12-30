@@ -12,7 +12,7 @@ Features
 - Builds executables for distribution on Windows, Mac, and Linux.
 - Supports including extra files automatically.
 - Can automatically number builds.
-- Supports loading a specified config file.
+- Supports loading a specified config file. NOT ANYMORE. BROKEN RIGHT NOW. SORRY.
   (Note: Must be called from its own directory, but can access a config file from anywhere relative to there.)
 
 Installation
