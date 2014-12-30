@@ -33,8 +33,9 @@ removeOld=false
 # If this is false, LovePackaging will quit if you try to build with the same version number twice.
 allowOverwrite=false
 
-# Auto-number builds? NOT IMPLEMENTED
+# Auto-number builds?
 # An "-buildN" will be added to the end of ZIP package names, with N being the Nth time this project was built.
+#  (To do this, a build.number file is stored in $outputDir, so watch out for that.)
 autoNumberBuilds=false
 
 # Use curl or wget?
