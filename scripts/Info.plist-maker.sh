@@ -82,4 +82,4 @@ echo "	<string>© $copyrightYear $author</string>
 </dict>
 </plist>" >> ./tmp/Info.plist
 
-echo "Info.plist generated."
+echo "  Info.plist generated."
