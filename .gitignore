@@ -1,1 +1,4 @@
+!builds/
 builds/*
+!builds/build.number
+tmp/
