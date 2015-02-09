@@ -14,7 +14,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFile</key>
-			<string>LoveDocument.icns</string>
+			<string>$osxFileIcon</string>
 			<key>CFBundleTypeName</key>
 			<string>LÖVE Project</string>
 			<key>CFBundleTypeRole</key>
@@ -42,20 +42,17 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 	<key>CFBundleExecutable</key>
 	<string>love</string>
 	<key>CFBundleIconFile</key>
-	<string>Love.icns</string>
-	<key>CFBundleIdentifier</key>" > ./tmp/Info.plist
-
-echo "	<string>$identifier</string>
+	<string>$osxBundleIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>$identifier</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>" >> ./tmp/Info.plist
-
-echo "	<string>$friendlyPackageName</string>
+	<key>CFBundleName</key>
+	<string>$friendlyPackageName</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>" >> ./tmp/Info.plist
-
-echo "	<string>$version</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$version</string>
 	<key>CFBundleSignature</key>
 	<string>LoVe</string>
 	<key>DTCompiler</key>
@@ -74,12 +71,11 @@ echo "	<string>$version</string>
 	<string>5B1008</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
-	<key>NSHumanReadableCopyright</key>" >> ./tmp/Info.plist
-
-echo "	<string>© $copyrightYear $author</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© $copyrightYear $author</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
-</plist>" >> ./tmp/Info.plist
+</plist>" > ./tmp/Info.plist
 
 echo "  Info.plist generated."

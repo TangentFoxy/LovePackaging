@@ -136,6 +136,9 @@ cd "$osx10Dir"
 cp -r ./love.app "./$packageName.app"
 # Copy in our .love file
 cp "$outputDir/$packageName-$version.love" "$osx10Dir/$packageName.app/Contents/Resources/$packageName.love"
+# Copy in our icons
+cp "$osxIconsDirectory/$osxFileIcon" "$osx10Dir/$packageName.app/Contents/Resources/$osxFileIcon"
+cp "$osxIconsDirectory/$osxBundleIcon" "$osx10Dir/$packageName.app/Contents/Resources/$osxBundleIcon"
 # Create an Info.plist and copy it in
 cd "$originalDir"
 source "$originalDir/scripts/Info.plist-maker.sh"
