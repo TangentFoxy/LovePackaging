@@ -68,6 +68,9 @@ if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
 	echo "Extracting win32src..."
 	unzip -q "$win32Dir/love32.zip" -d "$win32Dir"
 	echo "  Done."
+	echo "Deleting ZIP file..."
+	rm -f "$win32Dir/love32.zip"
+	echo "  Done."
 fi
 
 if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
@@ -77,6 +80,9 @@ if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
 	echo "  Done."
 	echo "Extracting win64src..."
 	unzip -q "$win64Dir/love64.zip" -d "$win64Dir"
+	echo "  Done."
+	echo "Deleting ZIP file..."
+	rm -f "$win64Dir/love64.zip"
 	echo "  Done."
 fi
 
@@ -91,6 +97,9 @@ if [ ! -d "$osx10Dir/love.app" ]; then
 	rm -rf "$osx10Dir/__MACOSX"
 	# the Info.plist is generated each time a package is built, we don't need a copy here
 	rm -f "$osx10Dir/love.app/Contents/Info.plist"
+	echo "  Done."
+	echo "Deleting ZIP file..."
+	rm -f "$osx10Dir/loveOSX.zip"
 	echo "  Done."
 fi
 
