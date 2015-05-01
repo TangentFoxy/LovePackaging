@@ -60,10 +60,10 @@ echo "  Done."
 
 # check if executables exist, if not, download them
 #   (assumes if the exe exists, everything else does too)
-if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
+if [ ! -r "$win32Dir/love-$loveVersion-win32/love.exe" ]; then
 	mkdir -p "$win32Dir"
 	echo "Downloading win32src..."
-	$download "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win32.zip
+	$download "$win32Dir/love32.zip" https://bitbucket.org/rude/love/downloads/love-$loveVersion-win32.zip
 	echo "  Done."
 	echo "Extracting win32src..."
 	unzip -q "$win32Dir/love32.zip" -d "$win32Dir"
@@ -73,10 +73,10 @@ if [ ! -r "$win32Dir/love-0.9.1-win32/love.exe" ]; then
 	echo "  Done."
 fi
 
-if [ ! -r "$win64Dir/love-0.9.1-win64/love.exe" ]; then
+if [ ! -r "$win64Dir/love-$loveVersion-win64/love.exe" ]; then
 	mkdir -p "$win64Dir"
 	echo "Downloading win64src..."
-	$download "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip
+	$download "$win64Dir/love64.zip" https://bitbucket.org/rude/love/downloads/love-$loveVersion-win64.zip
 	echo "  Done."
 	echo "Extracting win64src..."
 	unzip -q "$win64Dir/love64.zip" -d "$win64Dir"
@@ -89,7 +89,7 @@ fi
 if [ ! -d "$osx10Dir/love.app" ]; then
 	mkdir -p "$osx10Dir"
 	echo "Downloading osx10src..."
-	$download "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip
+	$download "$osx10Dir/loveOSX.zip" https://bitbucket.org/rude/love/downloads/love-$loveVersion-macosx-x64.zip
 	echo "  Done."
 	echo "Extracting osx10src..."
 	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
@@ -111,7 +111,7 @@ cat "$win32exe" "$outputDir/$packageName-$version.love" > "$win32Dir/$packageNam
 cd "$win32Dir"
 # ZIP up the EXE
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" "./$packageName.exe"
-cd ./love-0.9.1-win32
+cd ./love-$loveVersion-win32
 # ZIP up the required DLLs
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
@@ -130,7 +130,7 @@ cat "$win64exe" "$outputDir/$packageName-$version.love" > "$win64Dir/$packageNam
 cd "$win64Dir"
 # ZIP up the EXE
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" "./$packageName.exe"
-cd ./love-0.9.1-win64
+cd ./love-$loveVersion-win64
 # ZIP up the required DLLs
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
@@ -171,7 +171,7 @@ echo "Building $packageName (version $version)... (Linux zip)"
 cd "$outputDir"
 # ZIP up the .love file
 zip -r -X -q "./$packageName-${version}_linux.zip" "./$packageName-$version.love"
-cp "$win64Dir/love-0.9.1-win64/LOVE-license.txt" ./LOVE-license.txt
+cp "$win64Dir/love-$loveVersion-win64/LOVE-license.txt" ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
 # ZIP up the extra included files
