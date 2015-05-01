@@ -181,6 +181,15 @@ if [ "$(ls -A $includes)" ]; then
 fi
 echo "  Done."
 
+if [ $latestBuilds = true ]; then
+	mkdir -p "$latestBuildsDir"
+	rm -f "$latestBuildsDir/*"
+	cp "$outputDir/$packageName-${version}_win32.zip" "$latestBuildsDir"
+	cp "$outputDir/$packageName-${version}_win64.zip" "$latestBuildsDir"
+	cp "$outputDir/$packageName-${version}_osx.zip" "$latestBuildsDir"
+	cp "$outputDir/$packageName-${version}_linux.zip" "$latestBuildsDir"
+fi
+
 echo "Builds complete. Unless there are errors above. Double check your files."
 echo
 if which fortune > /dev/null 2>&1; then fortune; fi

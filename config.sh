@@ -53,6 +53,11 @@ allowOverwrite=false
 #  (To do this, a build.number file is stored in $outputDir, so watch out for that.)
 autoNumberBuilds=false
 
+# Place latest builds in builds/latest?
+#  (This is a copy, not a move.)
+latestBuilds=false
+latestBuildsDir="$outputDir/latest"
+
 # Use curl or wget?
 # (One of these lines should be commented out, the other not)
 #download="curl -o"
