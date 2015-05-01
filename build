@@ -117,9 +117,11 @@ zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
-cd "$includes"
 # ZIP up extra included files
-zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
+	zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
+fi
 echo "  Done."
 
 echo "Building $packageName (version $version)... (win64 zip)"
@@ -134,9 +136,11 @@ zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*.dll
 cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
-cd "$includes"
 # ZIP up extra included files
-zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
+	zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
+fi
 echo "  Done."
 
 echo "Building $packageName (version $version)... (OS X zip)"
@@ -156,9 +160,11 @@ cp "$originalDir/tmp/Info.plist" "$osx10Dir/$packageName.app/Contents/Info.plist
 rm -rf "$originalDir/tmp"
 # ZIP up the .app directory
 zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
-cd "$includes"
 # ZIP up the extra included files
-zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
+	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
+fi
 echo "  Done."
 
 echo "Building $packageName (version $version)... (Linux zip)"
@@ -168,9 +174,11 @@ zip -r -X -q "./$packageName-${version}_linux.zip" "./$packageName-$version.love
 cp "$win64Dir/love-0.9.1-win64/LOVE-license.txt" ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
-cd "$includes"
 # ZIP up the extra included files
-zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
+	zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
+fi
 echo "  Done."
 
 echo "Builds complete. Unless there are errors above. Double check your files."
