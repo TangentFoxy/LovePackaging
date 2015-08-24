@@ -24,7 +24,7 @@ Quick Guide:
 
 1. Download the [latest release](https://github.com/Guard13007/LovePackaging/releases)!
 2. Copy the files wherever you want, inside your own repo, outside, wherever!
-3. Edit `config.sh` to specify options on how your packages will be built, including where the sources are and where to put the result.
+3. Edit `build-config.sh` to specify options on how your packages will be built, including where the sources are and where to put the result.
 4. Run `./build` for Linux / Mac OS X (OSX users need wget installed!!).
    No Windows version yet, sorry.
 

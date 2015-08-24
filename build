@@ -10,7 +10,7 @@ set -o errexit
 #	# has a command-line option, which should be the config file to load from
 #	source "$1"
 #else
-	source ./config.sh
+	source ./build-config.sh
 #fi
 
 # make $outputDir if it doesn't exist
@@ -118,8 +118,8 @@ cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
 # ZIP up extra included files
-if [ "$(ls -A $includes)" ]; then
-	cd "$includes"
+if [ "$(ls -A $build-includes)" ]; then
+	cd "$build-includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
 fi
 echo "  Done."
@@ -137,8 +137,8 @@ cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
 # ZIP up extra included files
-if [ "$(ls -A $includes)" ]; then
-	cd "$includes"
+if [ "$(ls -A $build-includes)" ]; then
+	cd "$build-includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
 fi
 echo "  Done."
@@ -154,15 +154,15 @@ cp "$osxIconsDirectory/$osxFileIcon" "$osx10Dir/$packageName.app/Contents/Resour
 cp "$osxIconsDirectory/$osxBundleIcon" "$osx10Dir/$packageName.app/Contents/Resources/$osxBundleIcon"
 # Create an Info.plist and copy it in
 cd "$originalDir"
-source "$originalDir/lp-scripts/Info.plist-maker.sh"
+source "$originalDir/build-scripts/Info.plist-maker.sh"
 cd "$osx10Dir"
 cp "$originalDir/tmp/Info.plist" "$osx10Dir/$packageName.app/Contents/Info.plist"
 rm -rf "$originalDir/tmp"
 # ZIP up the .app directory
 zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
 # ZIP up the extra included files
-if [ "$(ls -A $includes)" ]; then
-	cd "$includes"
+if [ "$(ls -A $build-includes)" ]; then
+	cd "$build-includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
 fi
 echo "  Done."
@@ -175,8 +175,8 @@ cp "$win64Dir/love-$loveVersion-win64/LOVE-license.txt" ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
 # ZIP up the extra included files
-if [ "$(ls -A $includes)" ]; then
-	cd "$includes"
+if [ "$(ls -A $build-includes)" ]; then
+	cd "$build-includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
 fi
 echo "  Done."
