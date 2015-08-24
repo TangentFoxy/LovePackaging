@@ -31,8 +31,8 @@ loveVersion="0.9.2"
 
 # Modified love executables (optional)
 # (The default values are where the default exe's will be extracted)
-win32exe="$win32Dir/love-$loveVersion-win32/love.exe" #UNTESTED, MAY BREAK
-win64exe="$win64Dir/love-$loveVersion-win64/love.exe" #UNTESTED, MAY BREAK
+win32exe="$win32Dir/love-$loveVersion-win32/love.exe"
+win64exe="$win64Dir/love-$loveVersion-win64/love.exe"
 
 # Mac icns files for package icon
 # (It's best to just specify the same file for both.
