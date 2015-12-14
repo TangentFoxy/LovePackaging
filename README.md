@@ -28,7 +28,7 @@ Quick Guide:
 4. Run `./build` for Linux / Mac OS X (OSX users need wget installed!!).
    No Windows version yet, sorry.
 
-A quick note to mention: The build script must be run from its own directory. Everything in the config.sh should be absolute directories. If specifying a custom config script, the path must be a relative path to where the build script is located. This is kinda shitty, but I am kinda shitty, sorry.
+A quick note to mention: The build script must be run from its own directory. Everything in the config.sh should be absolute directories. If specifying a custom config script, the path must be a relative path from where the build script is located. This is kinda shitty, but I am kinda shitty, sorry.
 
 Contributing
 ------------
@@ -41,6 +41,3 @@ Troubleshooting
 ---------------
 
 Feel free to submit an issue for any problem you have, also check [the forum](https://love2d.org/forums/viewtopic.php?f=4&t=79155&sid=2dfd50989af78c87dc75a9558e1ffb08) post for help.
-
-Screenshots are great if you're reporting a problem. But in any case, common
-problems listed below, all one of them!
