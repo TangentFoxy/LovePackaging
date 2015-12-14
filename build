@@ -29,7 +29,7 @@ if [ $autoNumberBuilds = true ]; then
 	# store the current build number
 	echo "build=$build" > "$outputDir/build.number"
 	# set version to use new build number
-	version=$version-build$build
+	version=$version-$build
 fi
 
 # check that zip and unzip are accessible
@@ -93,7 +93,7 @@ if [ ! -d "$osx10Dir/love.app" ]; then
 	echo "  Done."
 	echo "Extracting osx10src..."
 	unzip -q "$osx10Dir/loveOSX.zip" -d "$osx10Dir"
-	# delete Mac crao (for some reason can't not unzip it *shrugs*)
+	# delete Mac crap (for some reason can't not unzip it *shrugs*)
 	rm -rf "$osx10Dir/__MACOSX"
 	# the Info.plist is generated each time a package is built, we don't need a copy here
 	rm -f "$osx10Dir/love.app/Contents/Info.plist"
@@ -118,8 +118,8 @@ cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./LOVE-license.txt
 # ZIP up extra included files
-if [ "$(ls -A $build-includes)" ]; then
-	cd "$build-includes"
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_win32.zip" ./*
 fi
 echo "  Done."
@@ -137,8 +137,8 @@ cp ./license.txt ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./LOVE-license.txt
 # ZIP up extra included files
-if [ "$(ls -A $build-includes)" ]; then
-	cd "$build-includes"
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_win64.zip" ./*
 fi
 echo "  Done."
@@ -161,8 +161,8 @@ rm -rf "$originalDir/tmp"
 # ZIP up the .app directory
 zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" "./$packageName.app"
 # ZIP up the extra included files
-if [ "$(ls -A $build-includes)" ]; then
-	cd "$build-includes"
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_osx.zip" ./*
 fi
 echo "  Done."
@@ -175,8 +175,8 @@ cp "$win64Dir/love-$loveVersion-win64/LOVE-license.txt" ./LOVE-license.txt
 # ZIP up the LOVE license
 zip -r -X -q "./$packageName-${version}_linux.zip" ./LOVE-license.txt
 # ZIP up the extra included files
-if [ "$(ls -A $build-includes)" ]; then
-	cd "$build-includes"
+if [ "$(ls -A $includes)" ]; then
+	cd "$includes"
 	zip -r -X -q "$outputDir/$packageName-${version}_linux.zip" ./*
 fi
 echo "  Done."
