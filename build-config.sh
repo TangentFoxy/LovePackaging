@@ -5,7 +5,7 @@ friendlyPackageName="$packageName"
 # Who made this? (Yes, change this to your name.)
 author="Guard13007"
 # Copyright year (ex 2014-2015 or 2015)
-copyrightYear="2014"
+copyrightYear="2016"
 # A unique identifier for your package.
 # (It should be fine to leave this as its default.)
 identifier="com.$author.$packageName"
@@ -26,8 +26,8 @@ win32Dir="$outputDir/win32src"
 win64Dir="$outputDir/win64src"
 osx10Dir="$outputDir/osx10src"
 
-# Specify what version of love to use (default latest (currently 0.9.2))
-loveVersion="0.9.2"
+# Specify what version of love to use
+loveVersion="0.10.1"
 
 # Modified love executables (optional)
 # (The default values are where the default exe's will be extracted)
@@ -42,20 +42,21 @@ osxFileIcon="LoveDocument.icns"
 osxBundleIcon="Love.icns"
 
 # Remove old packages?
-removeOld=false
+removeOld=true
 
 # Allow overwrite? NOT IMPLEMENTED
 # If this is false, LovePackaging will quit if you try to build with the same version number twice.
 allowOverwrite=false
+#NOTE to self: if autoNumberBuilds, this setting doesn't matter
 
 # Auto-number builds?
 # An "-buildN" will be added to the end of ZIP package names, with N being the Nth time this project was built.
 #  (To do this, a build.number file is stored in $outputDir, so watch out for that.)
-autoNumberBuilds=false
+autoNumberBuilds=true
 
 # Place latest builds in builds/latest?
 #  (This is a copy, not a move.)
-latestBuilds=false
+latestBuilds=true
 latestBuildsDir="$outputDir/latest"
 
 # Use curl or wget?
