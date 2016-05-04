@@ -38,8 +38,8 @@ win64exe="$win64Dir/love-$loveVersion-win64/love.exe"
 # (It's best to just specify the same file for both?
 # I don't think both are needed, but I am not very familiar with the Mac system.)
 osxIconsDirectory="$osx10Dir/love.app/Contents/Resources"
-osxFileIcon="LoveDocument.icns"
-osxBundleIcon="Love.icns"
+osxFileIcon="GameIcon.icns"
+osxBundleIcon="OS X AppIcon.icns"
 
 # Remove old packages?
 removeOld=true
