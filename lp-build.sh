@@ -10,7 +10,7 @@ set -o errexit
 #	# has a command-line option, which should be the config file to load from
 #	source "$1"
 #else
-	source ./build-config.sh
+	source ./lp-config.sh
 #fi
 
 # make $outputDir if it doesn't exist
