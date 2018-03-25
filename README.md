@@ -1,4 +1,4 @@
-LovePackaging
+LövePackaging
 =============
 
 [![GitHub release](https://img.shields.io/github/release/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/releases/latest)
@@ -6,7 +6,7 @@ LovePackaging
 [![GitHub issues](https://img.shields.io/github/issues-raw/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/issues)
 [![GitHub license](https://img.shields.io/github/license/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/blob/master/LICENSE)
 
-Scripts to create Love2d packages.
+Scripts to create LÖVE packages.
 
 Currently working in Linux, untested in OS X (though it should work assuming you
 have wget installed), and undeveloped for Windows.
