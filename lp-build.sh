@@ -154,7 +154,7 @@ cp "$osxIconsDirectory/$osxFileIcon" "$osx10Dir/$packageName.app/Contents/Resour
 cp "$osxIconsDirectory/$osxBundleIcon" "$osx10Dir/$packageName.app/Contents/Resources/$osxBundleIcon"
 # Create an Info.plist and copy it in
 cd "$originalDir"
-source "$originalDir/build-scripts/Info.plist-maker.sh"
+source "$originalDir/lp-scripts/Info.plist-maker.sh"
 cd "$osx10Dir"
 cp "$originalDir/tmp/Info.plist" "$osx10Dir/$packageName.app/Contents/Info.plist"
 rm -rf "$originalDir/tmp"
