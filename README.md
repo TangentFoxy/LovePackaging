@@ -1,10 +1,10 @@
 LövePackaging
 =============
 
-[![GitHub release](https://img.shields.io/github/release/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/releases/latest)
-[![GitHub downloads](https://img.shields.io/github/downloads/Guard13007/LovePackaging/latest/total.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/releases/latest)
-[![GitHub issues](https://img.shields.io/github/issues-raw/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/issues)
-[![GitHub license](https://img.shields.io/github/license/Guard13007/LovePackaging.svg?maxAge=2592000)](https://github.com/Guard13007/LovePackaging/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/TangentFoxy/LovePackaging.svg?maxAge=2592000)](https://github.com/TangentFoxy/LovePackaging/releases/latest)
+[![GitHub downloads](https://img.shields.io/github/downloads/TangentFoxy/LovePackaging/latest/total.svg?maxAge=2592000)](https://github.com/TangentFoxy/LovePackaging/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues-raw/TangentFoxy/LovePackaging.svg?maxAge=2592000)](https://github.com/TangentFoxy/LovePackaging/issues)
+[![GitHub license](https://img.shields.io/github/license/TangentFoxy/LovePackaging.svg?maxAge=2592000)](https://github.com/TangentFoxy/LovePackaging/blob/master/LICENSE)
 
 Scripts to create LÖVE packages.
 
